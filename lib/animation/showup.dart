@@ -36,10 +36,12 @@ class _ShowUpState extends State<ShowUp> with TickerProviderStateMixin {
     ).animate(curve);
 
     if (widget.delay == null) {
-      _animController.forward().orCancel;
+      _animController.forward().orCancel.catchError((error) {});
     } else {
       Timer(Duration(milliseconds: widget.delay), () {
-        _animController.forward().orCancel;
+        if (mounted) {
+          _animController.forward().orCancel.catchError((error) {});
+        }
       });
     }
   }
