@@ -2,6 +2,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 Duration millis(int millis) => Duration(milliseconds: millis);
+Duration seconds(int seconds) => Duration(seconds: seconds);
+Duration minutes(int minutes) => Duration(minutes: minutes);
 
 TargetPlatform currentPlatform(BuildContext context) => Theme.of(context).platform;
 
