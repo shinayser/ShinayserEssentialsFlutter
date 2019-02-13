@@ -1,6 +1,6 @@
 name: shinayser_essentials_flutter
 description: A new Flutter project.
-version: 1.1.0
+version: 1.1.1
 author:
 homepage:
 
@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  quiver: '>=2.0.0 <3.0.0'
 
 dev_dependencies:
   flutter_test:
