@@ -18,6 +18,13 @@ class JsonObject extends DelegatingMap<String, dynamic> {
     JsonEncoder encoder = JsonEncoder.withIndent('   ');
     return encoder.convert(jsonMap);
   }
+
+  dynamic operator [](Object key) {
+    var value = delegate[key];
+    if (value is Map<String, dynamic>) return JsonObject(value);
+    if (value is List<dynamic>) return JsonArray.list(value);
+    return value;
+  }
 }
 
 class JsonArray<T> extends DelegatingList<T> {
@@ -29,7 +36,6 @@ class JsonArray<T> extends DelegatingList<T> {
     List<dynamic> array = (json.decode(jsonString));
 
     try {
-      //Tries to convert the members into JsonObjects
       final auxArray = array.map((value) => JsonObject(value)).toList();
       array = auxArray;
     } catch (e) {}
