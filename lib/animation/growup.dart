@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-class ShowUp extends StatefulWidget {
+class GrowUp extends StatefulWidget {
   final Widget child;
-  final double offset;
   final Animation<double> animation;
 
   ///This will be ignored if [animation] is provided.
@@ -13,36 +12,34 @@ class ShowUp extends StatefulWidget {
   ///This will be ignored if [animation] is provided.
   final int duration;
 
-  ShowUp({
+  ///This will be ignored if [animation] is provided.
+  final Curve curve;
+
+  GrowUp({
     @required this.child,
     this.delay,
     this.duration,
-    this.offset,
     this.animation,
+    this.curve = Curves.linear,
     Key key,
   }) : super(key: key);
 
   @override
-  _ShowUpState createState() => _ShowUpState();
+  _GrowUpState createState() => _GrowUpState();
 }
 
-class _ShowUpState extends State<ShowUp> with TickerProviderStateMixin {
+class _GrowUpState extends State<GrowUp> with TickerProviderStateMixin {
   AnimationController _animController;
-  Animation<Offset> _animOffset;
+  Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
 
     if (widget.animation == null) {
-      _animController = AnimationController(vsync: this, duration: Duration(milliseconds: widget.duration ?? 500));
+      _animController = AnimationController(vsync: this, duration: Duration(milliseconds: widget.duration ?? 200));
+      _animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(parent: _animController, curve: widget.curve));
     }
-
-    final curve = CurvedAnimation(curve: Curves.ease, parent: _animController ?? widget.animation);
-    _animOffset = Tween<Offset>(
-      begin: Offset(0.0, widget.offset ?? 1.0),
-      end: Offset.zero,
-    ).animate(curve);
 
     if (_animController != null) {
       if (widget.delay == null) {
@@ -65,12 +62,9 @@ class _ShowUpState extends State<ShowUp> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      child: SlideTransition(
-        position: _animOffset,
-        child: widget.child,
-      ),
-      opacity: _animController ?? widget.animation,
+    return ScaleTransition(
+      child: widget.child,
+      scale: _animation ?? widget.animation,
     );
   }
 }
