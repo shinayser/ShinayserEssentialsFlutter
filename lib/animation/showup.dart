@@ -22,11 +22,31 @@ class ShowUp extends StatefulWidget {
     Key key,
   }) : super(key: key);
 
+  ///Creates a ShowUp with a offset = 0.5 (half the child's height)
+  ShowUp.half({
+    @required this.child,
+    this.delay,
+    this.duration,
+    this.animation,
+    Key key,
+  })  : this.offset = 0.5,
+        super(key: key);
+
+  ///Creates a ShowUp with a offset = 0.2 (1/5 the child's height)
+  ShowUp.fifth({
+    @required this.child,
+    this.delay,
+    this.duration,
+    this.animation,
+    Key key,
+  })  : this.offset = 0.2,
+        super(key: key);
+
   @override
   _ShowUpState createState() => _ShowUpState();
 }
 
-class _ShowUpState extends State<ShowUp> with TickerProviderStateMixin {
+class _ShowUpState extends State<ShowUp> with SingleTickerProviderStateMixin {
   AnimationController _animController;
   Animation<Offset> _animOffset;
 

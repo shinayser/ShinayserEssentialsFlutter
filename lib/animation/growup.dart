@@ -5,30 +5,33 @@ import 'package:flutter/material.dart';
 class GrowUp extends StatefulWidget {
   final Widget child;
   final Animation<double> animation;
-
-  ///This will be ignored if [animation] is provided.
   final int delay;
-
-  ///This will be ignored if [animation] is provided.
   final int duration;
-
-  ///This will be ignored if [animation] is provided.
   final Curve curve;
 
   GrowUp({
     @required this.child,
     this.delay,
     this.duration,
-    this.animation,
     this.curve = Curves.linear,
     Key key,
-  }) : super(key: key);
+  })  : animation = null,
+        super(key: key);
+
+  GrowUp.fromAnimation({
+    @required this.child,
+    @required this.animation,
+    Key key,
+  })  : delay = null,
+        duration = null,
+        curve = null,
+        super(key: key);
 
   @override
   _GrowUpState createState() => _GrowUpState();
 }
 
-class _GrowUpState extends State<GrowUp> with TickerProviderStateMixin {
+class _GrowUpState extends State<GrowUp> with SingleTickerProviderStateMixin {
   AnimationController _animController;
   Animation<double> _animation;
 
