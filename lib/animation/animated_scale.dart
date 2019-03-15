@@ -1,3 +1,4 @@
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -21,13 +22,15 @@ class AnimatedScale extends StatefulWidget {
         super(key: key);
 
   @override
-  _AnimatedScaleState createState() => _AnimatedScaleState();
+  _AnimatedSafadoState createState() => _AnimatedSafadoState();
 }
 
-class _AnimatedScaleState extends State<AnimatedScale>
+class _AnimatedSafadoState extends State<AnimatedScale>
     with SingleTickerProviderStateMixin, AnimationControllerOwnerMixin {
   Animation<double> _animation;
   double oldScale = 0;
+
+  Timer currentTimer;
 
   @override
   void initState() {
@@ -35,13 +38,20 @@ class _AnimatedScaleState extends State<AnimatedScale>
     animationDuration = Duration(milliseconds: widget.duration ?? 300);
     _animation = Tween(begin: oldScale, end: widget.scale)
         .animate(CurvedAnimation(parent: animationController, curve: widget.curve));
+
+    animationController.addStatusListener((AnimationStatus it) {
+      if (it == AnimationStatus.completed) {
+        oldScale = widget.scale;
+      }
+    });
+
     _runAnimation();
   }
 
   @override
   void didUpdateWidget(AnimatedScale oldWidget) {
+    super.didUpdateWidget(oldWidget);
     if (widget.scale != oldWidget.scale || widget.duration != oldWidget.scale || widget.curve != oldWidget.curve) {
-      oldScale = oldWidget.scale;
       _animation = Tween(begin: oldScale, end: widget.scale)
           .animate(CurvedAnimation(parent: animationController, curve: widget.curve));
 
@@ -49,13 +59,15 @@ class _AnimatedScaleState extends State<AnimatedScale>
       animationController.reset();
       _runAnimation();
     }
-    super.didUpdateWidget(oldWidget);
   }
 
   void _runAnimation() {
+    currentTimer?.cancel();
     if (widget.delay != null) {
-      Timer(Duration(milliseconds: widget.delay), () {
-        animationController.forward().orCancel.catchError((error) {});
+      currentTimer = Timer(Duration(milliseconds: widget.delay), () {
+        if (mounted) {
+          animationController.forward().orCancel.catchError((error) {});
+        }
       });
     } else {
       animationController.forward().orCancel.catchError((error) {});
