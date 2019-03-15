@@ -43,12 +43,6 @@ class _AnimatedScaleState extends State<AnimatedScale>
   }
 
   @override
-  void dispose() {
-    animationController?.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return ScaleTransition(
       child: widget.child,
