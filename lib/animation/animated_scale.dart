@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -51,7 +50,7 @@ class _AnimatedSafadoState extends State<AnimatedScale>
   @override
   void didUpdateWidget(AnimatedScale oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.scale != oldWidget.scale || widget.duration != oldWidget.scale || widget.curve != oldWidget.curve) {
+    if (widget.scale != oldWidget.scale || widget.duration != oldWidget.duration || widget.curve != oldWidget.curve) {
       _animation = Tween(begin: oldScale, end: widget.scale)
           .animate(CurvedAnimation(parent: animationController, curve: widget.curve));
 
