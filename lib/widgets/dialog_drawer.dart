@@ -24,12 +24,15 @@ class _PopupDrawerState extends State<PopupDrawer> with SingleTickerProviderStat
   @override
   void didChangeDependencies() {
     _offsetTransition = Tween<Offset>(end: Offset(1, 0), begin: Offset.zero).animate(this.animationController)
-      ..addStatusListener((it) {
-        if (it == AnimationStatus.completed) {
-          Navigator.of(context).pop(null);
-        }
-      });
+      ..removeStatusListener(_statusListener)
+      ..addStatusListener(_statusListener);
     super.didChangeDependencies();
+  }
+
+  _statusListener(AnimationStatus status) {
+    if (status == AnimationStatus.completed) {
+      Navigator.of(context).pop(null);
+    }
   }
 
   @override
