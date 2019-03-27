@@ -28,4 +28,11 @@ void repeat(int amount, ValueChanged<int> callback) {
   }
 }
 
-Color hexToColor(String code) => Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+Color hexToColor(String code) {
+  if (code[0] == "#")
+    return Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+  else
+    return Color(int.parse(code, radix: 16) + 0xFF000000);
+}
+
+String capitalize(String text) => text[0].toUpperCase() + text.substring(1);
