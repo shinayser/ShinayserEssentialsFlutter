@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 
 ///An extension of [StreamBuilder] that only calls the [builder] method
 ///when the snapshot returns a non-null value, returning this way an empty Container
@@ -13,6 +14,7 @@ class LazyStreamBuilder<T> extends StreamBuilder<T> {
           key: key,
           stream: stream,
           builder: builder,
+          initialData: (stream is BehaviorSubject) ? ((stream as BehaviorSubject).value) : null,
         );
 
   final Widget onWaiting;
