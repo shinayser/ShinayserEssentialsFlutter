@@ -36,3 +36,31 @@ Color hexToColor(String code) {
 }
 
 String capitalize(String text) => text[0].toUpperCase() + text.substring(1);
+
+Duration parseDuration(String string) {
+  int hours = 0;
+  int minutes = 0;
+//  int micros;
+  List<String> parts = string.split(':');
+//  if (parts.length > 2) {
+  hours = int.parse(parts[0]);
+//  }
+//  if (parts.length > 1) {
+  minutes = int.parse(parts[1]);
+//  }
+
+//  micros = (double.parse(parts[parts.length - 1]) * 1000000).round();
+
+  return Duration(hours: hours, minutes: minutes);
+}
+
+String printDurationAsTwoDigits(Duration duration, {bool includeSeconds = false}) {
+  String twoDigits(int n) {
+    if (n >= 10) return "$n";
+    return "0$n";
+  }
+
+  String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+  String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+  return "${twoDigits(duration.inHours)}:$twoDigitMinutes${includeSeconds ? twoDigitSeconds : ""}";
+}
