@@ -8,3 +8,4 @@ export 'animation/animated_scale.dart';
 export 'animation/animation_controller_owner_mixin.dart';
 export 'widgets/dialog_drawer.dart';
 export 'widgets/lazy_stream_builder.dart';
+export 'widgets/one_point_recognizer.dart';
