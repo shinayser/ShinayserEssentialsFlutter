@@ -5,7 +5,8 @@ Duration millis(int millis) => Duration(milliseconds: millis);
 Duration seconds(int seconds) => Duration(seconds: seconds);
 Duration minutes(int minutes) => Duration(minutes: minutes);
 
-TargetPlatform currentPlatform(BuildContext context) => Theme.of(context).platform;
+TargetPlatform currentPlatform(BuildContext context) =>
+    Theme.of(context).platform;
 
 bool isDebug() {
   bool isDebug = false;
@@ -54,7 +55,8 @@ Duration parseDuration(String string) {
   return Duration(hours: hours, minutes: minutes);
 }
 
-String printDurationAsTwoDigits(Duration duration, {bool includeSeconds = false}) {
+String printDurationAsTwoDigits(Duration duration,
+    {bool includeSeconds = false}) {
   String twoDigits(int n) {
     if (n >= 10) return "$n";
     return "0$n";
@@ -63,4 +65,19 @@ String printDurationAsTwoDigits(Duration duration, {bool includeSeconds = false}
   String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
   String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
   return "${twoDigits(duration.inHours)}:$twoDigitMinutes${includeSeconds ? twoDigitSeconds : ""}";
+}
+
+typedef Future FutureGenerator();
+
+///A retry function for Futures
+Future<T> retry<T>(int retries, FutureGenerator aFuture) async {
+  try {
+    return await aFuture();
+  } catch (e) {
+    if (retries > 1) {
+      return retry(retries - 1, aFuture);
+    }
+
+    rethrow;
+  }
 }
