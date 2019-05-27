@@ -68,11 +68,19 @@ String printDurationAsTwoDigits(Duration duration,
 }
 
 typedef Future<T> FutureGenerator<T>();
+typedef bool Predicate<T>(T value);
 
 ///A retry function for Futures
-Future<T> retry<T>(int retries, FutureGenerator<T> aFuture) async {
+Future<T> retry<T>(int retries, FutureGenerator aFuture,
+    {Predicate<T> shouldRetry}) async {
   try {
-    return await aFuture();
+    var returnedValue = await aFuture();
+
+    if (shouldRetry?.call(returnedValue) == true) {
+      throw Exception("Needs retry");
+    } else {
+      return returnedValue;
+    }
   } catch (e) {
     if (retries > 1) {
       return retry(retries - 1, aFuture);
