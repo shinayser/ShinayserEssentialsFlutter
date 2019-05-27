@@ -67,10 +67,10 @@ String printDurationAsTwoDigits(Duration duration,
   return "${twoDigits(duration.inHours)}:$twoDigitMinutes${includeSeconds ? twoDigitSeconds : ""}";
 }
 
-typedef Future FutureGenerator();
+typedef Future<T> FutureGenerator<T>();
 
 ///A retry function for Futures
-Future<T> retry<T>(int retries, FutureGenerator aFuture) async {
+Future<T> retry<T>(int retries, FutureGenerator<T> aFuture) async {
   try {
     return await aFuture();
   } catch (e) {
