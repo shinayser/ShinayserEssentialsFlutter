@@ -72,7 +72,7 @@ typedef bool Predicate<T>(T value);
 
 ///A retry function for Futures
 Future<T> retry<T>(
-  int retries,
+  int attempts,
   FutureGenerator aFuture, {
   Predicate<T> shouldRetry,
   Duration waitBetweenRetries,
@@ -80,18 +80,18 @@ Future<T> retry<T>(
   try {
     var returnedValue = await aFuture();
 
-    if (shouldRetry?.call(returnedValue) == true) {
+    if (shouldRetry?.call(returnedValue) == true && attempts > 1) {
       throw Exception("Needs retry");
     } else {
       return returnedValue;
     }
   } catch (e) {
-    if (retries > 1) {
+    if (attempts > 1) {
       if (waitBetweenRetries != null) {
         await Future.delayed(waitBetweenRetries);
       }
       return await retry(
-        retries - 1,
+        attempts - 1,
         aFuture,
         shouldRetry: shouldRetry,
         waitBetweenRetries: waitBetweenRetries,
