@@ -83,7 +83,7 @@ Future<T> retry<T>(int retries, FutureGenerator aFuture,
     }
   } catch (e) {
     if (retries > 1) {
-      return await retry(retries - 1, aFuture);
+      return await retry(retries - 1, aFuture, shouldRetry: shouldRetry);
     }
 
     rethrow;
