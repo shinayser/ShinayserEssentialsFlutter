@@ -10,7 +10,8 @@ class PopupDrawer extends StatefulWidget {
   _PopupDrawerState createState() => _PopupDrawerState();
 }
 
-class _PopupDrawerState extends State<PopupDrawer> with SingleTickerProviderStateMixin, AnimationControllerOwnerMixin {
+class _PopupDrawerState extends State<PopupDrawer>
+    with SingleTickerProviderStateMixin, AnimationControllerOwnerMixin {
   static const kDrawerWidth = 304.0;
 
   Animation<Offset> _offsetTransition;
@@ -23,9 +24,10 @@ class _PopupDrawerState extends State<PopupDrawer> with SingleTickerProviderStat
 
   @override
   void didChangeDependencies() {
-    _offsetTransition = Tween<Offset>(end: Offset(1, 0), begin: Offset.zero).animate(this.animationController)
-      ..removeStatusListener(_statusListener)
-      ..addStatusListener(_statusListener);
+    _offsetTransition = Tween<Offset>(end: Offset(1, 0), begin: Offset.zero)
+        .animate(this.animationController)
+          ..removeStatusListener(_statusListener)
+          ..addStatusListener(_statusListener);
     super.didChangeDependencies();
   }
 
@@ -38,7 +40,8 @@ class _PopupDrawerState extends State<PopupDrawer> with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width - kDrawerWidth),
+      padding: EdgeInsets.only(
+          left: MediaQuery.of(context).size.width - kDrawerWidth),
       child: SlideTransition(
         position: _offsetTransition,
         child: GestureDetector(
@@ -80,7 +83,7 @@ Future<T> showDialogDrawer<T>({
     barrierDismissible: true,
     barrierLabel: "Dismissable",
     barrierColor: Colors.black.withOpacity(0.5),
-    transitionDuration: millis(200),
+    transitionDuration: animationDuration,
     transitionBuilder: (context, anim, anim2, child) => SlideTransition(
           position: Tween(
             begin: const Offset(1, 0),
