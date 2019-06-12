@@ -6,6 +6,14 @@ class PairWidget extends StatelessWidget {
   final double spacing;
   final Axis direction;
 
+  const PairWidget({
+    Key key,
+    this.direction = Axis.horizontal,
+    this.child1,
+    this.child2,
+    this.spacing = 4,
+  }) : super(key: key);
+
   const PairWidget.horizontal({
     Key key,
     this.child1,
