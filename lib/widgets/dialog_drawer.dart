@@ -33,7 +33,8 @@ class _PopupDrawerState extends State<PopupDrawer>
 
   _statusListener(AnimationStatus status) {
     if (status == AnimationStatus.completed) {
-      Navigator.of(context).pop(null);
+      var navigator = Navigator.of(context);
+      if (navigator.canPop()) navigator.pop(null);
     }
   }
 
