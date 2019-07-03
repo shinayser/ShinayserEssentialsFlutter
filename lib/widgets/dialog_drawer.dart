@@ -19,7 +19,7 @@ class _PopupDrawerState extends State<PopupDrawer>
   @override
   void initState() {
     super.initState();
-    animationDuration = millis(300);
+    animationDuration = Duration(milliseconds: 300);
   }
 
   @override
