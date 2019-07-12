@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 
 class FadePageRoute extends PageRouteBuilder {
-  final Widget widget;
+  final WidgetBuilder builder;
 
-  FadePageRoute({@required this.widget, Duration transitionDuration = const Duration(milliseconds: 300)})
+  FadePageRoute(
+      {@required this.builder,
+      Duration transitionDuration = const Duration(milliseconds: 300)})
       : super(
           pageBuilder: (
             BuildContext context,
             Animation<double> animation,
             Animation<double> secondaryAnimation,
           ) =>
-              widget,
+              builder(context),
           transitionDuration: transitionDuration,
-          transitionsBuilder: ((BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation,
+          transitionsBuilder: ((BuildContext context,
+                  Animation<double> animation,
+                  Animation<double> secondaryAnimation,
                   Widget child) =>
               FadeTransition(
                 opacity: animation,

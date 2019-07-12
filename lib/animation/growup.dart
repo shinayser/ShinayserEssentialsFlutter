@@ -13,7 +13,7 @@ class GrowUp extends StatefulWidget {
     @required this.child,
     this.delay,
     this.duration,
-    this.curve = Curves.linear,
+    this.curve = Curves.decelerate,
     Key key,
   })  : animation = null,
         super(key: key);
@@ -40,8 +40,11 @@ class _GrowUpState extends State<GrowUp> with SingleTickerProviderStateMixin {
     super.initState();
 
     if (widget.animation == null) {
-      _animController = AnimationController(vsync: this, duration: Duration(milliseconds: widget.duration ?? 200));
-      _animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(parent: _animController, curve: widget.curve));
+      _animController = AnimationController(
+          vsync: this,
+          duration: Duration(milliseconds: widget.duration ?? 200));
+      _animation = Tween(begin: 0.0, end: 1.0).animate(
+          CurvedAnimation(parent: _animController, curve: widget.curve));
     }
 
     if (_animController != null) {
