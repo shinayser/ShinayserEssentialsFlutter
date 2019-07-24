@@ -8,5 +8,5 @@ Add this to your pusbec.yaml dependencies:
 ```shinayser_essentials_flutter:
     git:
       url: https://github.com/shinayser/ShinayserEssentialsFlutter.git
-      ref: 1.1.2
+      ref: 1.15.0
  ```
