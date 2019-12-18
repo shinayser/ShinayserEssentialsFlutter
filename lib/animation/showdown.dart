@@ -42,6 +42,16 @@ class ShowDown extends StatefulWidget {
   })  : this.offset = 0.2,
         super(key: key);
 
+  ///Creates a ShowUp with a offset = 0.1 (1/10 the child's height)
+  ShowDown.tenth({
+    @required this.child,
+    this.delay,
+    this.duration,
+    this.animation,
+    Key key,
+  })  : this.offset = 0.1,
+        super(key: key);
+
   @override
   _ShowDownState createState() => _ShowDownState();
 }

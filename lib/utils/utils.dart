@@ -36,7 +36,7 @@ Color hexToColor(String code) {
     return Color(int.parse(code, radix: 16) + 0xFF000000);
 }
 
-String capitalize(String text) => text[0].toUpperCase() + text.substring(1);
+//String capitalize(String text) => text[0].toUpperCase() + text.substring(1);
 
 Duration parseDuration(String string) {
   int hours = 0;

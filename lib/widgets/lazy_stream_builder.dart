@@ -14,7 +14,9 @@ class LazyStreamBuilder<T> extends StreamBuilder<T> {
           key: key,
           stream: stream,
           builder: builder,
-          initialData: (stream is BehaviorSubject) ? ((stream as BehaviorSubject).value) : null,
+          initialData: (stream is BehaviorSubject)
+              ? ((stream as BehaviorSubject).value)
+              : null,
         );
 
   final Widget onWaiting;

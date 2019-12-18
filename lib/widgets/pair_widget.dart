@@ -5,6 +5,7 @@ class PairWidget extends StatelessWidget {
   final Widget child2;
   final double spacing;
   final Axis direction;
+  final CrossAxisAlignment crossAxisAlignment;
 
   const PairWidget({
     Key key,
@@ -12,6 +13,7 @@ class PairWidget extends StatelessWidget {
     this.child1,
     this.child2,
     this.spacing = 4,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
   }) : super(key: key);
 
   const PairWidget.horizontal({
@@ -19,6 +21,7 @@ class PairWidget extends StatelessWidget {
     this.child1,
     this.child2,
     this.spacing = 4,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
   })  : this.direction = Axis.horizontal,
         super(key: key);
 
@@ -27,6 +30,7 @@ class PairWidget extends StatelessWidget {
     this.child1,
     this.child2,
     this.spacing = 4,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
   })  : this.direction = Axis.vertical,
         super(key: key);
 
@@ -35,13 +39,13 @@ class PairWidget extends StatelessWidget {
     if (direction == Axis.horizontal) {
       return Row(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: crossAxisAlignment,
         children: _children(),
       );
     } else {
       return Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: crossAxisAlignment,
         children: _children(),
       );
     }

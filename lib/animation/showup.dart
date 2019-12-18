@@ -42,6 +42,16 @@ class ShowUp extends StatefulWidget {
   })  : this.offset = 0.2,
         super(key: key);
 
+  ///Creates a ShowUp with a offset = 0.1 (1/10 the child's height)
+  ShowUp.tenth({
+    @required this.child,
+    this.delay,
+    this.duration,
+    this.animation,
+    Key key,
+  })  : this.offset = 0.1,
+        super(key: key);
+
   @override
   _ShowUpState createState() => _ShowUpState();
 }
@@ -55,10 +65,13 @@ class _ShowUpState extends State<ShowUp> with SingleTickerProviderStateMixin {
     super.initState();
 
     if (widget.animation == null) {
-      _animController = AnimationController(vsync: this, duration: Duration(milliseconds: widget.duration ?? 500));
+      _animController = AnimationController(
+          vsync: this,
+          duration: Duration(milliseconds: widget.duration ?? 500));
     }
 
-    final curve = CurvedAnimation(curve: Curves.ease, parent: _animController ?? widget.animation);
+    final curve = CurvedAnimation(
+        curve: Curves.ease, parent: _animController ?? widget.animation);
     _animOffset = Tween<Offset>(
       begin: Offset(0.0, widget.offset ?? 1.0),
       end: Offset.zero,
