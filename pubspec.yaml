@@ -1,11 +1,11 @@
 name: shinayser_essentials_flutter
 description: A new Flutter project.
-version: 1.17.2
+version: 1.18.0 #Don't forget to change on README.MD also
 author:
 homepage:
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:
