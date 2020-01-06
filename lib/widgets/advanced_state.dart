@@ -7,5 +7,4 @@ abstract class AdvancedState<T extends StatefulWidget> extends State<T> {
   MediaQueryData get media => context.mediaQuery;
 
   NavigatorState get navigator => context.navigator;
-
 }
