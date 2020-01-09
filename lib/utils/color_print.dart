@@ -12,21 +12,13 @@ AnsiPen _magenta = AnsiPen()..magenta();
 
 extension PrintExtension<T> on T {
   void print() => core.print(this);
-
   void printRed() => core.print(_red(this?.toString()));
-
   void printYellow() => core.print(_yellow(this?.toString()));
-
   void printBlack() => core.print(_black(this?.toString()));
-
   void printGreen() => core.print(_green(this?.toString()));
-
   void printWhite() => core.print(_white(this?.toString()));
-
   void printBlue() => core.print(_blue(this?.toString()));
-
   void printCyan() => core.print(_cyan(this?.toString()));
-
   void printMagenta() => core.print(_magenta(this?.toString()));
 }
 

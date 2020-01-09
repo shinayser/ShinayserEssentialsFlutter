@@ -3,7 +3,7 @@ library shinayser_essentials_flutter;
 export 'utils/utils.dart';
 export 'utils/fade_page_route.dart';
 export 'utils/util_extensions.dart';
-export 'utils/color_print.dart';
+//export 'utils/color_print.dart';
 export 'animation/showup.dart';
 export 'animation/showdown.dart';
 export 'animation/growup.dart';

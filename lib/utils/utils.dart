@@ -18,6 +18,13 @@ bool isDebug() {
   return isDebug;
 }
 
+///Prints only if while on DEBUG environment.
+void printDebug(Object object) {
+  if (isDebug()) {
+    print(object);
+  }
+}
+
 int randomInt([int max]) => Random.secure().nextInt(max ?? (1 << 32));
 bool randomBoolean() => Random.secure().nextBool();
 double getRadian(double degree) => degree * pi / 180;
