@@ -24,7 +24,7 @@ class RequestObject<T> {
     this.status = RequestStatus.DONE;
   }
 
-  RequestObject.error({this.error, this.tag}) {
+  RequestObject.error({this.error, this.tag, this.result}) {
     this.status = RequestStatus.ERROR;
   }
 
