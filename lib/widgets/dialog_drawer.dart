@@ -86,14 +86,14 @@ Future<T> showDialogDrawer<T>({
     barrierColor: Colors.black.withOpacity(0.5),
     transitionDuration: animationDuration,
     transitionBuilder: (context, anim, anim2, child) => SlideTransition(
-          position: Tween(
-            begin: const Offset(1, 0),
-            end: const Offset(0, 0),
-          ).animate(anim),
-          child: child,
-        ),
+      position: Tween(
+        begin: const Offset(1, 0),
+        end: const Offset(0, 0),
+      ).animate(anim),
+      child: child,
+    ),
     pageBuilder: (context, anim, anim2) => PopupDrawer(
-          child: builder(context),
-        ),
+      child: builder(context),
+    ),
   );
 }

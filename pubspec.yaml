@@ -1,6 +1,6 @@
 name: shinayser_essentials_flutter
 description: A new Flutter project.
-version: 1.22.0 #Don't forget to change on README.MD also
+version: 1.23.0 #Don't forget to change on README.MD also
 author:
 homepage:
 
@@ -12,8 +12,8 @@ dependencies:
     sdk: flutter
 
   quiver: '>=2.0.0 <3.0.0'
-  rxdart: ^0.24.1
-  ansicolor: ^1.0.2
+  rxdart: ^0.25.0
+  ansicolor: ^1.1.1
 
 dev_dependencies:
   flutter_test:
