@@ -25,7 +25,7 @@ void printDebug(Object object) {
   }
 }
 
-int randomInt([int max]) => Random.secure().nextInt(max ?? (1 << 32));
+int randomInt([int? max]) => Random.secure().nextInt(max ?? (1 << 32));
 bool randomBoolean() => Random.secure().nextBool();
 double getRadian(double degree) => degree * pi / 180;
 Future delay(int millis) => Future.delayed(Duration(milliseconds: millis));
@@ -81,8 +81,8 @@ typedef bool Predicate<T>(T value);
 Future<T> retry<T>(
   int attempts,
   FutureGenerator aFuture, {
-  Predicate<T> shouldRetry,
-  Duration waitBetweenRetries,
+  Predicate<T>? shouldRetry,
+  Duration? waitBetweenRetries,
 }) async {
   try {
     var returnedValue = await aFuture();

@@ -4,24 +4,24 @@ import 'package:flutter/material.dart';
 
 class GrowUp extends StatefulWidget {
   final Widget child;
-  final Animation<double> animation;
-  final int delay;
-  final int duration;
-  final Curve curve;
+  final Animation<double>? animation;
+  final int? delay;
+  final int? duration;
+  final Curve? curve;
 
   GrowUp({
-    @required this.child,
+    required this.child,
     this.delay,
     this.duration,
     this.curve = Curves.decelerate,
-    Key key,
+    Key? key,
   })  : animation = null,
         super(key: key);
 
   GrowUp.fromAnimation({
-    @required this.child,
-    @required this.animation,
-    Key key,
+    required this.child,
+    required this.animation,
+    Key? key,
   })  : delay = null,
         duration = null,
         curve = null,
@@ -32,8 +32,8 @@ class GrowUp extends StatefulWidget {
 }
 
 class _GrowUpState extends State<GrowUp> with SingleTickerProviderStateMixin {
-  AnimationController _animController;
-  Animation<double> _animation;
+  AnimationController? _animController;
+  Animation<double>? _animation;
 
   @override
   void initState() {
@@ -44,16 +44,16 @@ class _GrowUpState extends State<GrowUp> with SingleTickerProviderStateMixin {
           vsync: this,
           duration: Duration(milliseconds: widget.duration ?? 200));
       _animation = Tween(begin: 0.0, end: 1.0).animate(
-          CurvedAnimation(parent: _animController, curve: widget.curve));
+          CurvedAnimation(parent: _animController!, curve: widget.curve!));
     }
 
     if (_animController != null) {
       if (widget.delay == null) {
-        _animController.forward().orCancel.catchError((error) {});
+        _animController!.forward().orCancel.catchError((error) {});
       } else {
-        Timer(Duration(milliseconds: widget.delay), () {
+        Timer(Duration(milliseconds: widget.delay!), () {
           if (mounted) {
-            _animController.forward().orCancel.catchError((error) {});
+            _animController!.forward().orCancel.catchError((error) {});
           }
         });
       }
@@ -70,7 +70,7 @@ class _GrowUpState extends State<GrowUp> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return ScaleTransition(
       child: widget.child,
-      scale: _animation ?? widget.animation,
+      scale: _animation ?? widget.animation!,
     );
   }
 }

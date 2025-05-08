@@ -4,51 +4,51 @@ import 'package:flutter/material.dart';
 
 class ShowDown extends StatefulWidget {
   final Widget child;
-  final double offset;
-  final Animation<double> animation;
+  final double? offset;
+  final Animation<double>? animation;
 
   ///This will be ignored if [animation] is provided.
-  final int delay;
+  final int? delay;
 
   ///This will be ignored if [animation] is provided.
-  final int duration;
+  final int? duration;
 
   ShowDown({
-    @required this.child,
+    required this.child,
     this.delay,
     this.duration,
     this.offset,
     this.animation,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   ///Creates a ShowUp with a offset = 0.5 (half the child's height)
   ShowDown.half({
-    @required this.child,
+    required this.child,
     this.delay,
     this.duration,
     this.animation,
-    Key key,
+    Key? key,
   })  : this.offset = 0.5,
         super(key: key);
 
   ///Creates a ShowUp with a offset = 0.2 (1/5 the child's height)
   ShowDown.fifth({
-    @required this.child,
+    required this.child,
     this.delay,
     this.duration,
     this.animation,
-    Key key,
+    Key? key,
   })  : this.offset = 0.2,
         super(key: key);
 
   ///Creates a ShowUp with a offset = 0.1 (1/10 the child's height)
   ShowDown.tenth({
-    @required this.child,
+    required this.child,
     this.delay,
     this.duration,
     this.animation,
-    Key key,
+    Key? key,
   })  : this.offset = 0.1,
         super(key: key);
 
@@ -58,9 +58,9 @@ class ShowDown extends StatefulWidget {
 
 class _ShowDownState extends State<ShowDown>
     with SingleTickerProviderStateMixin {
-  AnimationController _animController;
-  Animation<Offset> _animOffset;
-  Animation<double> _animOpacity;
+  AnimationController? _animController;
+  late Animation<Offset> _animOffset;
+  Animation<double>? _animOpacity;
 
   @override
   void initState() {
@@ -74,11 +74,11 @@ class _ShowDownState extends State<ShowDown>
     }
 
     _animOpacity =
-        CurvedAnimation(curve: Interval(0.0, 0.4), parent: _animController);
+        CurvedAnimation(curve: Interval(0.0, 0.4), parent: _animController!);
 
     final curve = CurvedAnimation(
       curve: Curves.ease,
-      parent: _animController ?? widget.animation,
+      parent: _animController ?? widget.animation!,
     );
 
     _animOffset = Tween<Offset>(
@@ -88,11 +88,11 @@ class _ShowDownState extends State<ShowDown>
 
     if (_animController != null) {
       if (widget.delay == null) {
-        _animController.forward().orCancel.catchError((error) {});
+        _animController!.forward().orCancel.catchError((error) {});
       } else {
-        Timer(Duration(milliseconds: widget.delay), () {
+        Timer(Duration(milliseconds: widget.delay!), () {
           if (mounted) {
-            _animController.forward().orCancel.catchError((error) {});
+            _animController!.forward().orCancel.catchError((error) {});
           }
         });
       }
@@ -108,7 +108,7 @@ class _ShowDownState extends State<ShowDown>
   @override
   Widget build(BuildContext context) {
     return FadeTransition(
-      opacity: _animOpacity ?? widget.animation,
+      opacity: _animOpacity ?? widget.animation!,
       child: SlideTransition(
         position: _animOffset,
         child: widget.child,

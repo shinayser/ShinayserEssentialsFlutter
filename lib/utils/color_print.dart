@@ -22,19 +22,19 @@ extension PrintExtension<T> on T {
   void printMagenta() => core.print(_magenta(this?.toString()));
 }
 
-void printRed(core.Object object) => core.print(_red(object?.toString()));
+void printRed(core.Object? object) => core.print(_red(object?.toString()));
 
-void printYellow(core.Object object) => core.print(_yellow(object?.toString()));
+void printYellow(core.Object? object) => core.print(_yellow(object?.toString()));
 
-void printBlack(core.Object object) => core.print(_black(object?.toString()));
+void printBlack(core.Object? object) => core.print(_black(object?.toString()));
 
-void printGreen(core.Object object) => core.print(_green(object?.toString()));
+void printGreen(core.Object? object) => core.print(_green(object?.toString()));
 
-void printWhite(core.Object object) => core.print(_white(object?.toString()));
+void printWhite(core.Object? object) => core.print(_white(object?.toString()));
 
-void printBlue(core.Object object) => core.print(_blue(object?.toString()));
+void printBlue(core.Object? object) => core.print(_blue(object?.toString()));
 
-void printCyan(core.Object object) => core.print(_cyan(object?.toString()));
+void printCyan(core.Object? object) => core.print(_cyan(object?.toString()));
 
-void printMagenta(core.Object object) =>
+void printMagenta(core.Object? object) =>
     core.print(_magenta(object?.toString()));

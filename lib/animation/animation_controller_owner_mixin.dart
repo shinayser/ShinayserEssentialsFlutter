@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-mixin AnimationControllerOwnerMixin<T extends StatefulWidget> on SingleTickerProviderStateMixin<T> {
-  AnimationController animationController;
+mixin AnimationControllerOwnerMixin<T extends StatefulWidget>
+    on SingleTickerProviderStateMixin<T> {
+  late AnimationController animationController;
 
   @override
   void initState() {

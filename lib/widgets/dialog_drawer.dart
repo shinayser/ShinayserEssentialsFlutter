@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shinayser_essentials_flutter/shinayser_essentials_flutter.dart';
 
 class PopupDrawer extends StatefulWidget {
-  final Widget child;
+  final Widget? child;
 
   PopupDrawer({this.child});
 
@@ -14,7 +14,7 @@ class _PopupDrawerState extends State<PopupDrawer>
     with SingleTickerProviderStateMixin, AnimationControllerOwnerMixin {
   static const kDrawerWidth = 304.0;
 
-  Animation<Offset> _offsetTransition;
+  late Animation<Offset> _offsetTransition;
 
   @override
   void initState() {
@@ -50,8 +50,8 @@ class _PopupDrawerState extends State<PopupDrawer>
             animationController.value += details.delta.dx / kDrawerWidth;
           },
           onHorizontalDragEnd: (details) {
-            if (details.primaryVelocity.abs() > 500) {
-              if (details.primaryVelocity >= 0) {
+            if (details.primaryVelocity!.abs() > 500) {
+              if (details.primaryVelocity! >= 0) {
                 animationController.forward();
               } else {
                 animationController.reverse();
@@ -74,9 +74,9 @@ class _PopupDrawerState extends State<PopupDrawer>
   }
 }
 
-Future<T> showDialogDrawer<T>({
-  @required BuildContext context,
-  @required WidgetBuilder builder,
+Future<T?> showDialogDrawer<T>({
+  required BuildContext context,
+  required WidgetBuilder builder,
   Duration animationDuration = const Duration(milliseconds: 200),
 }) {
   return showGeneralDialog(

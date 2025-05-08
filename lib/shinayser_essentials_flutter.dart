@@ -14,4 +14,3 @@ export 'widgets/lazy_stream_builder.dart';
 export 'widgets/one_point_recognizer.dart';
 export 'widgets/pair_widget.dart';
 export 'widgets/advanced_state.dart';
-export 'package:rxdart/rxdart.dart';

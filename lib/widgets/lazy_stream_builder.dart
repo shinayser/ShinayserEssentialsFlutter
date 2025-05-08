@@ -6,9 +6,9 @@ import 'package:rxdart/rxdart.dart';
 ///or the [onWaiting] widget;
 class LazyStreamBuilder<T> extends StreamBuilder<T> {
   LazyStreamBuilder({
-    Key key,
-    Stream<T> stream,
-    AsyncWidgetBuilder<T> builder,
+    Key? key,
+    Stream<T>? stream,
+    required AsyncWidgetBuilder<T> builder,
     this.onWaiting,
   }) : super(
           key: key,
@@ -19,7 +19,7 @@ class LazyStreamBuilder<T> extends StreamBuilder<T> {
               : null,
         );
 
-  final Widget onWaiting;
+  final Widget? onWaiting;
 
   @override
   Widget build(BuildContext context, AsyncSnapshot<T> currentSummary) {

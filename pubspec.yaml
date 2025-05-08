@@ -5,15 +5,15 @@ author:
 homepage:
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.19.6 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
-  quiver: '>=2.0.0 <3.0.0'
-  rxdart: ^0.25.0
-  ansicolor: ^1.1.1
+  rxdart: ^0.28.0
+  ansicolor: ^2.0.0
 
 dev_dependencies:
   flutter_test:

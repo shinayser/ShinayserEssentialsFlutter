@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class OnlyOnePointerRecognizer extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
   const OnlyOnePointerRecognizer({this.child});
 
   @override

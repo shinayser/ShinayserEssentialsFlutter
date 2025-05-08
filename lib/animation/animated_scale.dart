@@ -6,17 +6,17 @@ import 'package:shinayser_essentials_flutter/shinayser_essentials_flutter.dart';
 class AnimatedScale extends StatefulWidget {
   final Widget child;
   final double scale;
-  final int duration;
-  final int delay;
+  final int? duration;
+  final int? delay;
   final Curve curve;
 
   AnimatedScale({
-    @required this.child,
+    required this.child,
     this.duration,
     this.delay,
-    @required this.scale,
+    required this.scale,
     this.curve = Curves.easeInOut,
-    Key key,
+    Key? key,
   })  : assert(scale >= 0 && scale <= 1),
         super(key: key);
 
@@ -26,10 +26,10 @@ class AnimatedScale extends StatefulWidget {
 
 class _AnimatedSafadoState extends State<AnimatedScale>
     with SingleTickerProviderStateMixin, AnimationControllerOwnerMixin {
-  Animation<double> _animation;
+  late Animation<double> _animation;
   double oldScale = 0;
 
-  Timer currentTimer;
+  Timer? currentTimer;
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class _AnimatedSafadoState extends State<AnimatedScale>
   void _runAnimation() {
     currentTimer?.cancel();
     if (widget.delay != null) {
-      currentTimer = Timer(Duration(milliseconds: widget.delay), () {
+      currentTimer = Timer(Duration(milliseconds: widget.delay!), () {
         if (mounted) {
           animationController.forward().orCancel.catchError((error) {});
         }

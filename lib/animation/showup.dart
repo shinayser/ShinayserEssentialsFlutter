@@ -4,52 +4,74 @@ import 'package:flutter/material.dart';
 
 class ShowUp extends StatefulWidget {
   final Widget child;
-  final double offset;
-  final Animation<double> animation;
+  final double? offset;
+  final Animation<double>? animation;
 
   ///This will be ignored if [animation] is provided.
-  final int delay;
+  final int? delay;
 
   ///This will be ignored if [animation] is provided.
-  final int duration;
+  final int? duration;
 
-  ShowUp({
-    @required this.child,
+  const ShowUp({
+    Key? key,
+    required this.child,
     this.delay,
     this.duration,
     this.offset,
     this.animation,
-    Key key,
   }) : super(key: key);
 
   ///Creates a ShowUp with a offset = 0.5 (half the child's height)
-  ShowUp.half({
-    @required this.child,
+  const ShowUp.half({
+    required this.child,
+    Key? key,
     this.delay,
     this.duration,
     this.animation,
-    Key key,
   })  : this.offset = 0.5,
         super(key: key);
 
-  ///Creates a ShowUp with a offset = 0.2 (1/5 the child's height)
-  ShowUp.fifth({
-    @required this.child,
+  /// Creates a ShowUp with a offset = 0
+  /// Thus, ignoring the translation animation and only applying
+  /// the opacity animation.
+  const ShowUp.zero({
+    required this.child,
+    Key? key,
     this.delay,
     this.duration,
     this.animation,
-    Key key,
+  })  : this.offset = 0,
+        super(key: key);
+
+  ///Creates a ShowUp with a offset = 0.2 (1/5 the child's height)
+  const ShowUp.fifth({
+    Key? key,
+    required this.child,
+    this.delay,
+    this.duration,
+    this.animation,
   })  : this.offset = 0.2,
         super(key: key);
 
   ///Creates a ShowUp with a offset = 0.1 (1/10 the child's height)
-  ShowUp.tenth({
-    @required this.child,
+  const ShowUp.tenth({
+    Key? key,
+    required this.child,
     this.delay,
     this.duration,
     this.animation,
-    Key key,
   })  : this.offset = 0.1,
+        super(key: key);
+
+  ///Creates a ShowUp with a offset = 0.1 (1/10 the child's height)
+  const ShowUp.micro({
+    Key? key,
+    required this.child,
+    this.delay,
+    this.duration,
+    this.animation,
+  })  : this.offset = 0.05,
         super(key: key);
 
   @override
@@ -57,8 +79,8 @@ class ShowUp extends StatefulWidget {
 }
 
 class _ShowUpState extends State<ShowUp> with SingleTickerProviderStateMixin {
-  AnimationController _animController;
-  Animation<Offset> _animOffset;
+  AnimationController? _animController;
+  late Animation<Offset> _animOffset;
 
   @override
   void initState() {
@@ -71,7 +93,7 @@ class _ShowUpState extends State<ShowUp> with SingleTickerProviderStateMixin {
     }
 
     final curve = CurvedAnimation(
-        curve: Curves.ease, parent: _animController ?? widget.animation);
+        curve: Curves.ease, parent: _animController ?? widget.animation!);
     _animOffset = Tween<Offset>(
       begin: Offset(0.0, widget.offset ?? 1.0),
       end: Offset.zero,
@@ -79,11 +101,11 @@ class _ShowUpState extends State<ShowUp> with SingleTickerProviderStateMixin {
 
     if (_animController != null) {
       if (widget.delay == null) {
-        _animController.forward().orCancel.catchError((error) {});
+        _animController!.forward().orCancel.catchError((error) {});
       } else {
-        Timer(Duration(milliseconds: widget.delay), () {
+        Timer(Duration(milliseconds: widget.delay!), () {
           if (mounted) {
-            _animController.forward().orCancel.catchError((error) {});
+            _animController!.forward().orCancel.catchError((error) {});
           }
         });
       }
@@ -103,7 +125,7 @@ class _ShowUpState extends State<ShowUp> with SingleTickerProviderStateMixin {
         position: _animOffset,
         child: widget.child,
       ),
-      opacity: _animController ?? widget.animation,
+      opacity: _animController ?? widget.animation!,
     );
   }
 }

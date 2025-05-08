@@ -13,9 +13,9 @@ class RequestStatus {
 }
 
 class RequestObject<T> {
-  T result;
+  T? result;
   dynamic error;
-  RequestStatus status;
+  RequestStatus? status;
   dynamic tag; //A dynamic value to identify this RequestObject
 
   RequestObject(this.result, this.status);
